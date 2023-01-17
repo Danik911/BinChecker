@@ -17,8 +17,8 @@ class Repository @Inject constructor(
         return remoteDataSource.getAllBanks()
     }
 
-     suspend fun getApiResponse(): Resource<ApiResponse> {
-        return  remoteDataSource.getApiResponse()
+     suspend fun getApiResponse(bin: String): ApiResponse {
+        return  remoteDataSource.getApiResponse(bin)
     }
 
 }

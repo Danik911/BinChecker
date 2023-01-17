@@ -1,12 +1,13 @@
 package com.example.binchecker.data.remote
 
 import com.example.binchecker.domain.model.ApiResponse
-import com.example.binchecker.util.Resource
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface BinListApi {
+interface BinApi {
 
-    @GET("/45717360")
-    suspend fun getBankByBin(): Resource<ApiResponse>
+    @GET("/{bin}")
+    suspend fun getBankInfo(@Path("bin") bin: String): ApiResponse
+
 }
+

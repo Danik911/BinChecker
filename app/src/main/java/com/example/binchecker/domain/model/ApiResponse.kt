@@ -2,14 +2,13 @@ package com.example.binchecker.domain.model
 
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 @Serializable
 data class ApiResponse(
-    val bank: Bank? = null,
+    val bank: Bank ,
     val brand: String,
-    val country: Country? = null,
-    val number: Number? = null,
+    val country: Country,
+    val number: Number,
     val prepaid: Boolean,
     val scheme: String,
     val type: String

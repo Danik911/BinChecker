@@ -10,5 +10,5 @@ interface RemoteDataSource {
     fun getAllBanks(): Flow<List<Bank>>
     suspend fun insertBank(bank: Bank)
     suspend fun deleteAllBanks()
-    suspend fun getApiResponse(): Resource<ApiResponse>
+    suspend fun getApiResponse(bin: String): ApiResponse
 }

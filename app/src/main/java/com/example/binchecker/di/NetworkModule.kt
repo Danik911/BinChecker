@@ -1,7 +1,7 @@
 package com.example.binchecker.di
 
 import com.example.binchecker.data.local.BankDatabase
-import com.example.binchecker.data.remote.BinListApi
+import com.example.binchecker.data.remote.BinApi
 import com.example.binchecker.data.repository.RemoteDataSourceImpl
 import com.example.binchecker.domain.repository.RemoteDataSource
 import com.example.binchecker.util.Constants.BASE_URL
@@ -12,7 +12,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -46,18 +45,18 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBinApi(retrofit: Retrofit): BinListApi {
-        return retrofit.create(BinListApi::class.java)
+    fun provideBinApi(retrofit: Retrofit): BinApi {
+        return retrofit.create(BinApi::class.java)
     }
 
     @Provides
     @Singleton
     fun provideRemoteDatasource(
-        binListApi: BinListApi,
+        binApi: BinApi,
         bankDatabase: BankDatabase,
     ): RemoteDataSource {
         return RemoteDataSourceImpl(
-            binListApi = binListApi,
+            binApi = binApi,
             bankDatabase = bankDatabase
         )
     }

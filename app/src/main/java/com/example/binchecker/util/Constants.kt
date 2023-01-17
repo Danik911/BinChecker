@@ -6,4 +6,5 @@ object Constants {
     const val BANK_TABLE = "bank_table"
 
     const val BASE_URL = "https://lookup.binlist.net"
+
 }
