@@ -1,7 +1,6 @@
 package com.example.binchecker.domain.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,6 +10,6 @@ data class Country(
     val emoji: String,
     val latitude: Int,
     val longitude: Int,
-    val name: String,
+    @SerialName("name") val countryName: String,
     val numeric: String
 )

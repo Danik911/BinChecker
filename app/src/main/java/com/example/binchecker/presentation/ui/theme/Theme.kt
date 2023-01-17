@@ -1,4 +1,4 @@
-package com.example.binchecker.ui.theme
+package com.example.binchecker.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
