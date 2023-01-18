@@ -12,6 +12,9 @@ class RemoteDataSourceImpl(
     private val binApi: BinApi,
     private val bankDatabase: BankDatabase
 ) : RemoteDataSource {
+
+    val bankDao = bankDatabase.bankDao()
+
     override suspend fun getBank(): Bank {
         TODO("Not yet implemented")
     }
@@ -29,7 +32,13 @@ class RemoteDataSourceImpl(
     }
 
     override suspend fun getApiResponse(bin: String): ApiResponse {
-        return binApi.getBankInfo(bin = bin)
-
+        var response = ApiResponse(success = false)
+        try {
+            response = binApi.getBankInfo(bin = bin)
+            response.bank?.let { bankDao.insertBank(it) }
+        } catch (e: Exception) {
+            ApiResponse(success = false, error = e)
+        }
+        return response
     }
 }

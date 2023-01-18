@@ -1,6 +1,5 @@
 package com.example.binchecker.presentation.components
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -21,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.binchecker.domain.model.MessageBarState
+import com.example.binchecker.util.MessageBarState
 import com.example.binchecker.presentation.ui.theme.EXTRA_LARGE_PADDING
 import com.example.binchecker.presentation.ui.theme.ErrorRed
 import com.example.binchecker.presentation.ui.theme.InfoGreen

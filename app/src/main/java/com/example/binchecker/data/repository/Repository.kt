@@ -4,8 +4,9 @@ import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.domain.repository.LocalDataSource
 import com.example.binchecker.domain.repository.RemoteDataSource
-import com.example.binchecker.util.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -17,8 +18,8 @@ class Repository @Inject constructor(
         return remoteDataSource.getAllBanks()
     }
 
-     suspend fun getApiResponse(bin: String): ApiResponse {
-        return  remoteDataSource.getApiResponse(bin)
+     suspend fun getApiResponse(bin: String) = withContext(Dispatchers.IO) {
+         return@withContext remoteDataSource.getApiResponse(bin)
     }
 
 }

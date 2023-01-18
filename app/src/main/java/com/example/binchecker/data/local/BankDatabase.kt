@@ -9,7 +9,7 @@ import com.example.binchecker.domain.model.Bank
 
 @Database(
     entities = [Bank::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(DatabaseConverter::class)

@@ -100,14 +100,15 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$room_version"
     implementation "androidx.room:room-paging:$room_version"
 
-
     // KotlinX Serialization
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
-
 
     //Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.9.0'
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.2.2")
 }

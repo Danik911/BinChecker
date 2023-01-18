@@ -2,7 +2,6 @@ package com.example.binchecker.domain.use_cases.get_all_banks
 
 import com.example.binchecker.data.repository.Repository
 import com.example.binchecker.domain.model.ApiResponse
-import com.example.binchecker.util.Resource
 import timber.log.Timber
 import javax.inject.Inject
 

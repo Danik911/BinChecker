@@ -26,7 +26,9 @@ object DatabaseModule {
         context,
         BankDatabase::class.java,
         BANK_DATABASE
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides
@@ -41,5 +43,4 @@ object DatabaseModule {
             bankDatabase = database
         )
     }
-
 }
