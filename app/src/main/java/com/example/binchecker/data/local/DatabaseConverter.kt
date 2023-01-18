@@ -24,5 +24,4 @@ class DatabaseConverter {
         return string.split(separator)
     }
 
-
 }
