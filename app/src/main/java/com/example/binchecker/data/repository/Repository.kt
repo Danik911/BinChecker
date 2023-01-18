@@ -14,6 +14,7 @@ class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
 ) {
 
+
     fun getAllBanks(): Flow<List<Bank>> {
         return remoteDataSource.getAllBanks()
     }

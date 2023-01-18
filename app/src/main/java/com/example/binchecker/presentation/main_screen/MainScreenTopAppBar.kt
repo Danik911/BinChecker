@@ -5,14 +5,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.binchecker.R.drawable.ic_vertical_menu
-import com.example.binchecker.presentation.components.DisplayAlertDialog
 import com.example.binchecker.presentation.ui.theme.topAppBarBackgroundColor
 import com.example.binchecker.presentation.ui.theme.topAppBarContentColor
 
 
 @Composable
 fun MainScreenTopAppBar(
-    onDeleteAllConfirmed: () -> Unit,
+    onHistoryClicked: () -> Unit,
 ) {
     TopAppBar(
         title = {
@@ -23,31 +22,17 @@ fun MainScreenTopAppBar(
         },
         backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor,
         actions = {
-            ProfileTopBarActions(
-                onDeleteAllConfirmed = onDeleteAllConfirmed
+            HistoryAction(
+                onHistoryClicked = onHistoryClicked
             )
         }
     )
 }
 
-@Composable
-fun ProfileTopBarActions(
-    onDeleteAllConfirmed: () -> Unit,
-) {
-    var openDialog by remember { mutableStateOf(false) }
-
-    DisplayAlertDialog(
-        openDialog = openDialog,
-        onYesClicked = { onDeleteAllConfirmed() },
-        onDialogClosed = { openDialog = false }
-    )
-
-    DeleteAllAction(onDelete = { openDialog = true})
-}
 
 
 @Composable
-fun DeleteAllAction(onDelete: () -> Unit) {
+fun HistoryAction(onHistoryClicked: () -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
     IconButton(onClick = { expanded = true }) {
@@ -63,11 +48,11 @@ fun DeleteAllAction(onDelete: () -> Unit) {
             DropdownMenuItem(
                 onClick = {
                     expanded = false
-                    onDelete()
+                    onHistoryClicked()
                 }
             ) {
                 Text(
-                    text = "Delete Account",
+                    text = "History",
                     style = MaterialTheme.typography.subtitle2
                 )
             }
@@ -78,5 +63,5 @@ fun DeleteAllAction(onDelete: () -> Unit) {
 @Composable
 @Preview
 fun LoginTopAppBarPreview() {
-    MainScreenTopAppBar( onDeleteAllConfirmed = {})
+
 }

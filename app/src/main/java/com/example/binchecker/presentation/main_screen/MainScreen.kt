@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
+import com.example.binchecker.navigation.Screen
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -24,9 +25,7 @@ fun MainScreen(
 
     Scaffold(topBar = {
         MainScreenTopAppBar(
-            onDeleteAllConfirmed = {
-                // TODO: Add delete function
-            }
+            onHistoryClicked = { navigateToHistoryScreen(navController = navController) }
         )
     },
         content = {
@@ -45,18 +44,15 @@ fun MainScreen(
             )
         }
 
-
     )
-
 
 }
 
 
-/*
-private fun navigateToLoginScreen(navController: NavHostController) {
-    navController.navigate(Screen.Login.route) {
-        popUpTo(Screen.Profile.route) {
+private fun navigateToHistoryScreen(navController: NavHostController) {
+    navController.navigate(Screen.History.route) {
+        popUpTo(Screen.Main.route) {
             inclusive = true
         }
     }
-}*/
+}
