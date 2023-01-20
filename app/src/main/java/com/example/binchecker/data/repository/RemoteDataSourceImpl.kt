@@ -5,6 +5,7 @@ import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.domain.repository.LocalDataSource
 import com.example.binchecker.domain.repository.RemoteDataSource
+import timber.log.Timber
 
 class RemoteDataSourceImpl(
     private val binApi: BinApi,
@@ -30,10 +31,13 @@ class RemoteDataSourceImpl(
         try {
             response = binApi.getBankInfo(bin = bin)
             localDataSource.insertBank(response)
+            Timber.d("${response.bank}")
 
         } catch (e: Exception) {
             ApiResponse(success = false, error = e)
         }
+        Timber.tag("RemoteDataSource").d("$response")
         return response
+
     }
 }

@@ -100,8 +100,8 @@ private fun CentralContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 24.dp),
-            primaryText = "Sign Out",
-            secondaryText = "Sign Out",
+            primaryText = "Search bank",
+            secondaryText = "Searching...",
             onClick = {
                 onSearchClicked(binBank)
             }

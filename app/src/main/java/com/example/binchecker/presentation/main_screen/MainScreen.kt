@@ -25,7 +25,7 @@ fun MainScreen(
 
     Scaffold(topBar = {
         MainScreenTopAppBar(
-            onHistoryClicked = { navigateToHistoryScreen(navController = navController) }
+            onHistoryClicked = { navController.navigate(Screen.History.route) }
         )
     },
         content = {
@@ -50,9 +50,5 @@ fun MainScreen(
 
 
 private fun navigateToHistoryScreen(navController: NavHostController) {
-    navController.navigate(Screen.History.route) {
-        popUpTo(Screen.Main.route) {
-            inclusive = true
-        }
-    }
+    navController.navigate(Screen.History.route)
 }

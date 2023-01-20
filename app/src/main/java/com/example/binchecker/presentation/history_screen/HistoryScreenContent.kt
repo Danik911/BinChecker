@@ -44,7 +44,7 @@ fun HistoryScreenContent(
         items(
            items = banks,
             key = { item: Bank ->
-            item
+            item.id
             }
         ) { bank ->
             val dismissState = rememberDismissState()

@@ -17,7 +17,6 @@ import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.presentation.ui.theme.*
 
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun BankListItem(banks: Bank) {
 
