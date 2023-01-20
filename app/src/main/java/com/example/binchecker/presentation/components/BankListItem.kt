@@ -13,12 +13,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import coil.annotation.ExperimentalCoilApi
 import com.example.binchecker.domain.model.ApiResponse
+import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.presentation.ui.theme.*
 
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun BankListItem(apiResponse: ApiResponse) {
+fun BankListItem(banks: Bank) {
 
     Surface(
         modifier = Modifier
@@ -36,7 +37,7 @@ fun BankListItem(apiResponse: ApiResponse) {
             Row {
                 Text(
                     modifier = Modifier.weight(8f),
-                    text = apiResponse.bank?.bankName ?: "Bank hasn't been found",
+                    text = banks.bankName,
                     color = MaterialTheme.colors.taskItemTextColor,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold,
@@ -58,7 +59,7 @@ fun BankListItem(apiResponse: ApiResponse) {
             }
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = apiResponse.bank?.phone ?: "Bank hasn't been found",
+                text = banks.phone,
                 color = MaterialTheme.colors.taskItemTextColor,
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 2,

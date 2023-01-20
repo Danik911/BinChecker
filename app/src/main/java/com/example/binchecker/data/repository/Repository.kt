@@ -16,11 +16,11 @@ class Repository @Inject constructor(
 
 
     fun getAllBanks(): Flow<List<Bank>> {
-        return remoteDataSource.getAllBanks()
+        return localDataSource.getAllBanks()
     }
 
      suspend fun getApiResponse(bin: String) = withContext(Dispatchers.IO) {
-         return@withContext remoteDataSource.getApiResponse(bin)
+         return@withContext remoteDataSource.getApiResponse(bin = bin)
     }
 
 }

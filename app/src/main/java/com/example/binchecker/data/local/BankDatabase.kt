@@ -4,12 +4,13 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.binchecker.data.local.dao.BankDao
+import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 
 
 @Database(
     entities = [Bank::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(DatabaseConverter::class)

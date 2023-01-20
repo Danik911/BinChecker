@@ -1,6 +1,7 @@
 package com.example.binchecker.data.local.dao
 
 import androidx.room.*
+import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 import kotlinx.coroutines.flow.Flow
 

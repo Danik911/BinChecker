@@ -3,6 +3,7 @@ package com.example.binchecker.di
 import com.example.binchecker.data.local.BankDatabase
 import com.example.binchecker.data.remote.BinApi
 import com.example.binchecker.data.repository.RemoteDataSourceImpl
+import com.example.binchecker.domain.repository.LocalDataSource
 import com.example.binchecker.domain.repository.RemoteDataSource
 import com.example.binchecker.util.Constants.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -53,11 +54,11 @@ object NetworkModule {
     @Singleton
     fun provideRemoteDatasource(
         binApi: BinApi,
-        bankDatabase: BankDatabase,
+       localDataSource: LocalDataSource,
     ): RemoteDataSource {
         return RemoteDataSourceImpl(
             binApi = binApi,
-            bankDatabase = bankDatabase
+            localDataSource = localDataSource
         )
     }
 

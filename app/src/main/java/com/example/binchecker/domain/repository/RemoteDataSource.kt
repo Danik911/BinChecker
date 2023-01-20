@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
     suspend fun getBank(): Bank
-    fun getAllBanks(): Flow<List<Bank>>
     suspend fun insertBank(bank: Bank)
     suspend fun deleteAllBanks()
     suspend fun getApiResponse(bin: String): ApiResponse

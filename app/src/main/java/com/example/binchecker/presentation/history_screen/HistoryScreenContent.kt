@@ -17,38 +17,36 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.example.binchecker.R.string.delete_icon
-import com.example.binchecker.domain.model.ApiResponse
+import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.presentation.components.BankListItem
 import com.example.binchecker.presentation.ui.theme.HighPriorityColor
 import com.example.binchecker.presentation.ui.theme.LARGEST_PADDING
 import com.example.binchecker.presentation.ui.theme.SMALL_PADDING
-import com.example.binchecker.util.Action
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable
-fun HistoryListContent(
-    apiResponse: List<ApiResponse>,
-    onSwipeToDelete: (Action, ApiResponse) -> Unit,
+fun HistoryScreenContent(
+    banks: List<Bank>,
+    onSwipeToDelete: (Bank) -> Unit,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(SMALL_PADDING)
     ) {
         items(
-           items = apiResponse,
-            key = { apiResponse: ApiResponse ->
-                apiResponse
+           items = banks,
+            key = { item: Bank ->
+            item
             }
-        ) { apiResponse ->
+        ) { bank ->
             val dismissState = rememberDismissState()
             val dismissDirection = dismissState.dismissDirection
             val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
@@ -57,7 +55,7 @@ fun HistoryListContent(
                 SideEffect {
                     scope.launch {
                         delay(300)
-                        onSwipeToDelete(Action.DELETE, apiResponse)
+                        onSwipeToDelete(bank)
                     }
                 }
             }
@@ -94,7 +92,7 @@ fun HistoryListContent(
                     background = { RedBackground(degrees = degrees) },
                     dismissContent = {
                         BankListItem(
-                           apiResponse = apiResponse
+                           banks = bank
                         )
                     }
                 )
