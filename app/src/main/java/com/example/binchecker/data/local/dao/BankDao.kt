@@ -20,4 +20,7 @@ interface BankDao {
     @Query("DELETE FROM bank_table")
     suspend fun deleteAllBanks()
 
+    @Delete
+    suspend fun deleteBank(bank: Bank)
+
 }

@@ -26,4 +26,9 @@ class Repository @Inject constructor(
         localDataSource.deleteAllBanks()
     }
 
+
+    suspend fun deleteBank(bank: Bank) = withContext(Dispatchers.IO) {
+        localDataSource.deleteBank(bank = bank)
+    }
+
 }

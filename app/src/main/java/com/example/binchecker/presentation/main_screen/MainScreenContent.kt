@@ -8,14 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import coil.transform.CircleCropTransformation
-import com.example.binchecker.R.drawable
 import com.example.binchecker.domain.model.ApiResponse
+import com.example.binchecker.domain.model.Bank
+import com.example.binchecker.presentation.components.BankListItem
 import com.example.binchecker.presentation.components.MessageBar
 import com.example.binchecker.presentation.components.SearchButton
 import com.example.binchecker.presentation.ui.theme.LoadingBlue
@@ -28,7 +24,7 @@ fun MainScreenContent(
     messageBarState: MessageBarState,
     binBank: String,
     onBinBankChanged: (String) -> Unit,
-    profilePhoto: String?,
+    bank: Bank?,
     onSearchClicked: (String) -> Unit
 ) {
     Column(
@@ -56,8 +52,8 @@ fun MainScreenContent(
             CentralContent(
                 binBank = binBank,
                 onFirstNameChanged = onBinBankChanged,
-                profilePhoto = profilePhoto,
-                onSearchClicked = {onSearchClicked(binBank)}
+                bank = bank,
+                onSearchClicked = { onSearchClicked(binBank) }
             )
         }
     }
@@ -67,7 +63,7 @@ fun MainScreenContent(
 private fun CentralContent(
     binBank: String,
     onFirstNameChanged: (String) -> Unit,
-    profilePhoto: String?,
+    bank: Bank?,
     onSearchClicked: (String) -> Unit
 ) {
     Column(
@@ -76,22 +72,12 @@ private fun CentralContent(
         verticalArrangement = Arrangement.Center
     ) {
 
-        AsyncImage(
-            modifier = Modifier.size(200.dp),
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(profilePhoto)
-                .crossfade(1000)
-                .placeholder(drawableResId = drawable.ic_placeholder)
-                .transformations(CircleCropTransformation())
-                .build(),
-            contentScale = ContentScale.Crop,
-            contentDescription = "Profile image"
-        )
+        BankListItem(bank = bank)
 
         OutlinedTextField(
             value = binBank,
             onValueChange = { onFirstNameChanged(it) },
-            label = { Text(text = "First Name") },
+            label = { Text(text = "Insert BIN") },
             textStyle = MaterialTheme.typography.body1,
             singleLine = true
         )

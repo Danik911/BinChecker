@@ -33,11 +33,11 @@ fun MainScreen(
                 apiResponse = apiResponse,
                 messageBarState = messageBarState,
                 binBank = binBank,
+                bank = mainViewModel.bank.value,
                 onBinBankChanged = {
                     mainViewModel.updateBinBank(it)
                 },
 
-                profilePhoto = country?.emoji,
                 onSearchClicked = {
                     mainViewModel.getApiBinResponse(binBank)
                 }

@@ -29,7 +29,9 @@ class LocalDataSourceImpl(bankDatabase: BankDatabase) : LocalDataSource {
        bankDao.deleteAllBanks()
     }
 
-
+    override suspend fun deleteBank(bank: Bank) {
+       bankDao.deleteBank(bank = bank)
+    }
 
 
 }

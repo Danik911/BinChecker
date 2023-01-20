@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.binchecker.domain.model.ApiResponse
+import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.domain.model.Country
 import com.example.binchecker.domain.use_cases.GetApiResponseUseCase
 import com.example.binchecker.util.MessageBarState
@@ -35,6 +36,9 @@ class MainScreenViewModel @Inject constructor(
     private val _binBank: MutableState<String> = mutableStateOf("")
     val binBank: State<String> = _binBank
 
+    private val _bank: MutableState<Bank?> = mutableStateOf(null)
+    val bank: State<Bank?> = _bank
+
 
     fun getApiBinResponse(binBank: String) {
         _apiResponseState.value = RequestState.Loading
@@ -43,6 +47,7 @@ class MainScreenViewModel @Inject constructor(
                 val response = getApiResponseUseCase(binBank)
 
                 _apiResponseState.value = RequestState.Success(data = response)
+                _bank.value = response.bank
                 _messageBarState.value =
                     MessageBarState(error = response.error)
                 Timber.d("$response")

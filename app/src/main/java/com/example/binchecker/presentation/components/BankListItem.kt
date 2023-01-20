@@ -11,14 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import coil.annotation.ExperimentalCoilApi
-import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.presentation.ui.theme.*
 
 
 @Composable
-fun BankListItem(banks: Bank) {
+fun BankListItem(bank: Bank?) {
 
     Surface(
         modifier = Modifier
@@ -36,7 +34,7 @@ fun BankListItem(banks: Bank) {
             Row {
                 Text(
                     modifier = Modifier.weight(8f),
-                    text = banks.bankName,
+                    text = bank?.bankName ?: "No information",
                     color = MaterialTheme.colors.taskItemTextColor,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold,
@@ -58,7 +56,7 @@ fun BankListItem(banks: Bank) {
             }
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = banks.phone,
+                text = bank?.phone ?: "No information",
                 color = MaterialTheme.colors.taskItemTextColor,
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 2,

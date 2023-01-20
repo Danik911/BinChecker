@@ -8,4 +8,5 @@ interface LocalDataSource {
     fun getAllBanks(): Flow<List<Bank>>
     suspend fun insertBank(apiResponse: ApiResponse)
     suspend fun deleteAllBanks()
+    suspend fun deleteBank(bank: Bank)
 }

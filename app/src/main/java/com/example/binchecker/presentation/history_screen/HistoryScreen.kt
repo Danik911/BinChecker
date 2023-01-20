@@ -17,7 +17,6 @@ fun HistoryScreen(
     historyViewModel: HistoryViewModel = hiltViewModel()
 ) {
 
-
     val allTasks: List<Bank> by historyViewModel.allBanks.collectAsStateWithLifecycle()
 
     val scaffoldState = rememberScaffoldState()
@@ -31,11 +30,8 @@ fun HistoryScreen(
         content = {
             HistoryScreenContent(
                 banks = allTasks,
-                onSwipeToDelete = {
-
-                }
+                onSwipeToDelete = historyViewModel::deleteBank
             )
-
         },
     )
 }
