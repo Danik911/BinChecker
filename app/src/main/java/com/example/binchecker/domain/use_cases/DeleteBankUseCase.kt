@@ -8,7 +8,6 @@ import javax.inject.Inject
 class DeleteBankUseCase @Inject constructor(private val repository: Repository) {
 
     suspend operator fun invoke(bank: Bank) {
-        Timber.d("Bank called")
         return repository.deleteBank(bank = bank)
     }
 }

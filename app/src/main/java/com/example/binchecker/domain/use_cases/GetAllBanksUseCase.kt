@@ -10,7 +10,6 @@ import javax.inject.Inject
 class GetAllBanksUseCase @Inject constructor(private val repository: Repository) {
 
     operator fun invoke(): Flow<List<Bank>> {
-        Timber.d("GetAllBanks called")
         return repository.getAllBanks()
     }
 }
