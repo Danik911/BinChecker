@@ -1,7 +1,7 @@
 package com.example.binchecker.di
 
 import com.example.binchecker.data.repository.Repository
-import com.example.binchecker.domain.use_cases.get_all_banks.GetApiResponseUseCase
+import com.example.binchecker.domain.use_cases.GetApiResponseUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

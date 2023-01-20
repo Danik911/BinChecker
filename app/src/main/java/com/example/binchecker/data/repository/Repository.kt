@@ -1,6 +1,5 @@
 package com.example.binchecker.data.repository
 
-import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.domain.repository.LocalDataSource
 import com.example.binchecker.domain.repository.RemoteDataSource
@@ -21,6 +20,10 @@ class Repository @Inject constructor(
 
      suspend fun getApiResponse(bin: String) = withContext(Dispatchers.IO) {
          return@withContext remoteDataSource.getApiResponse(bin = bin)
+    }
+
+     suspend fun deleteAllBanks() = withContext(Dispatchers.IO) {
+        localDataSource.deleteAllBanks()
     }
 
 }

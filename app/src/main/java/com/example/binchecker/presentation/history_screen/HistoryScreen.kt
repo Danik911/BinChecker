@@ -25,18 +25,19 @@ fun HistoryScreen(
         scaffoldState = scaffoldState,
         topBar = {
             HistoryTopAppBar(
-                onDeleteAllConfirmed = { }
+                onDeleteAllConfirmed = historyViewModel::deleteAllBanks
             )
         },
         content = {
             HistoryScreenContent(
                 banks = allTasks,
-                onSwipeToDelete = {}
+                onSwipeToDelete = {
+
+                }
             )
 
         },
-
-        )
+    )
 }
 
 

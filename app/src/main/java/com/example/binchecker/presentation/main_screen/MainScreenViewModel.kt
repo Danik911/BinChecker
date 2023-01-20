@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Country
-import com.example.binchecker.domain.use_cases.get_all_banks.GetApiResponseUseCase
+import com.example.binchecker.domain.use_cases.GetApiResponseUseCase
 import com.example.binchecker.util.MessageBarState
 import com.example.binchecker.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel

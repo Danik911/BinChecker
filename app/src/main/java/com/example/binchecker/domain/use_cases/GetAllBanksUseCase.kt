@@ -1,4 +1,4 @@
-package com.example.binchecker.domain.use_cases.get_all_banks
+package com.example.binchecker.domain.use_cases
 
 import com.example.binchecker.data.repository.Repository
 import com.example.binchecker.domain.model.ApiResponse

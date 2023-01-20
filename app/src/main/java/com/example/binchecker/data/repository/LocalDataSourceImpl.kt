@@ -26,7 +26,7 @@ class LocalDataSourceImpl(bankDatabase: BankDatabase) : LocalDataSource {
 
 
     override suspend fun deleteAllBanks() {
-        TODO("Not yet implemented")
+       bankDao.deleteAllBanks()
     }
 
 
