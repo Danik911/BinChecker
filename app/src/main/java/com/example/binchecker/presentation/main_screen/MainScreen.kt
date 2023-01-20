@@ -43,6 +43,7 @@ fun MainScreen(
 
                 onSearchClicked = {
                     mainViewModel.getApiBinResponse(binBank)
+
                 }
             )
         }

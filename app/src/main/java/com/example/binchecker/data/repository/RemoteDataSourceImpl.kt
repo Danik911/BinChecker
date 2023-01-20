@@ -12,21 +12,7 @@ class RemoteDataSourceImpl(
     private val localDataSource: LocalDataSource
 ) : RemoteDataSource {
 
-
-    override suspend fun getBank(): Bank {
-        TODO("Not yet implemented")
-    }
-
-
-    override suspend fun insertBank(bank: Bank) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteAllBanks() {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getApiResponse(bin: String): ApiResponse {
+     override suspend fun getApiResponse(bin: String): ApiResponse {
        return try {
             val response = binApi.getBankInfo(bin = bin)
             localDataSource.insertBank(response)

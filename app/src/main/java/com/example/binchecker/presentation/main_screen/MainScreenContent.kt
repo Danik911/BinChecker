@@ -15,6 +15,8 @@ import com.example.binchecker.presentation.components.BankListItem
 import com.example.binchecker.presentation.components.MessageBar
 import com.example.binchecker.presentation.components.SearchButton
 import com.example.binchecker.presentation.ui.theme.LoadingBlue
+import com.example.binchecker.presentation.ui.theme.MEDIUM_PADDING
+import com.example.binchecker.presentation.ui.theme.SMALL_PADDING
 import com.example.binchecker.util.MessageBarState
 import com.example.binchecker.util.RequestState
 
@@ -53,7 +55,8 @@ fun MainScreenContent(
                 binBank = binBank,
                 onFirstNameChanged = onBinBankChanged,
                 bank = bank,
-                onSearchClicked = { onSearchClicked(binBank) }
+                onSearchClicked = { onSearchClicked(binBank) },
+                loadingState = apiResponse
             )
         }
     }
@@ -64,12 +67,11 @@ private fun CentralContent(
     binBank: String,
     onFirstNameChanged: (String) -> Unit,
     bank: Bank?,
-    onSearchClicked: (String) -> Unit
+    onSearchClicked: (String) -> Unit,
+    loadingState: RequestState<ApiResponse>
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        modifier = Modifier.padding(SMALL_PADDING)
     ) {
 
         BankListItem(bank = bank)
@@ -79,7 +81,8 @@ private fun CentralContent(
             onValueChange = { onFirstNameChanged(it) },
             label = { Text(text = "Insert BIN") },
             textStyle = MaterialTheme.typography.body1,
-            singleLine = true
+            singleLine = true,
+            modifier = Modifier.padding(top = MEDIUM_PADDING)
         )
 
         SearchButton(
@@ -90,7 +93,9 @@ private fun CentralContent(
             secondaryText = "Searching...",
             onClick = {
                 onSearchClicked(binBank)
-            }
+            },
+            loadingState = loadingState
+
         )
     }
 }
