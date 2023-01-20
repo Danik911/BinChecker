@@ -25,7 +25,10 @@ fun MainScreen(
 
     Scaffold(topBar = {
         MainScreenTopAppBar(
-            onHistoryClicked = { navController.navigate(Screen.History.route) }
+            onHistoryClicked = {
+                navController.navigate(Screen.History.route)
+                mainViewModel.resetMessageBar()
+            }
         )
     },
         content = {
@@ -46,9 +49,4 @@ fun MainScreen(
 
     )
 
-}
-
-
-private fun navigateToHistoryScreen(navController: NavHostController) {
-    navController.navigate(Screen.History.route)
 }

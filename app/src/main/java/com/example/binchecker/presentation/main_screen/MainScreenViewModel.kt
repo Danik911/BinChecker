@@ -49,7 +49,7 @@ class MainScreenViewModel @Inject constructor(
                 _apiResponseState.value = RequestState.Success(data = response)
                 _bank.value = response.bank
                 _messageBarState.value =
-                    MessageBarState(error = response.error)
+                    MessageBarState(message = response.success.parseResult(), error = response.error)
                 Timber.d("$response")
 
             }
@@ -61,12 +61,18 @@ class MainScreenViewModel @Inject constructor(
     }
 
     fun updateBinBank(newName: String) {
-        if (newName.length < 20) {
+        if (newName.length <= 8) {
             _binBank.value = newName
         }
     }
+    fun resetMessageBar(){
+        _messageBarState.value = MessageBarState()
+    }
+    private fun Boolean.parseResult(): String{
+        return if (this) "Success" else "Fail"
+    }
 }
 
-//"45717360"
+
 
 

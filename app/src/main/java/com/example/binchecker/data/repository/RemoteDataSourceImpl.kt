@@ -27,17 +27,13 @@ class RemoteDataSourceImpl(
     }
 
     override suspend fun getApiResponse(bin: String): ApiResponse {
-        var response = ApiResponse(success = false)
-        try {
-            response = binApi.getBankInfo(bin = bin)
+       return try {
+            val response = binApi.getBankInfo(bin = bin)
             localDataSource.insertBank(response)
-            Timber.d("${response.bank}")
+           response.copy(success = true)
 
         } catch (e: Exception) {
             ApiResponse(success = false, error = e)
         }
-        Timber.tag("RemoteDataSource").d("$response")
-        return response
-
     }
 }
