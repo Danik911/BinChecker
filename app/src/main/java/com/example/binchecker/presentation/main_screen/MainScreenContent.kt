@@ -27,7 +27,8 @@ fun MainScreenContent(
     binBank: String,
     onBinBankChanged: (String) -> Unit,
     bank: Bank?,
-    onSearchClicked: (String) -> Unit
+    onSearchClicked: (String) -> Unit,
+    onBankLinkClicked: (String?) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -56,7 +57,8 @@ fun MainScreenContent(
                 onFirstNameChanged = onBinBankChanged,
                 bank = bank,
                 onSearchClicked = { onSearchClicked(binBank) },
-                loadingState = apiResponse
+                loadingState = apiResponse,
+                onBankLinkClicked = onBankLinkClicked
             )
         }
     }
@@ -68,13 +70,14 @@ private fun CentralContent(
     onFirstNameChanged: (String) -> Unit,
     bank: Bank?,
     onSearchClicked: (String) -> Unit,
-    loadingState: RequestState<ApiResponse>
+    loadingState: RequestState<ApiResponse>,
+    onBankLinkClicked: (String?) -> Unit,
 ) {
     Column(
         modifier = Modifier.padding(SMALL_PADDING)
     ) {
 
-        BankListItem(bank = bank)
+        BankListItem(bank = bank, onBankLinkClicked = onBankLinkClicked)
 
         OutlinedTextField(
             value = binBank,

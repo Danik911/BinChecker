@@ -93,7 +93,7 @@ fun HistoryScreenContent(
                     dismissContent = {
                         BankListItem(
                            bank = bank
-                        )
+                        ){}
                     }
                 )
             }

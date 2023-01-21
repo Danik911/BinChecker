@@ -1,5 +1,6 @@
 package com.example.binchecker.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,11 +15,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.binchecker.domain.model.Bank
-import com.example.binchecker.presentation.ui.theme.*
+import com.example.binchecker.presentation.ui.theme.SMALL_PADDING
+import com.example.binchecker.presentation.ui.theme.TASK_ITEM_ELEVATION
+import com.example.binchecker.presentation.ui.theme.bankItemBackgroundColor
+import com.example.binchecker.presentation.ui.theme.taskItemTextColor
 
 
 @Composable
-fun BankListItem(bank: Bank?) {
+fun BankListItem(
+    bank: Bank?,
+    onBankLinkClicked: (String?) -> Unit
+) {
 
     Surface(
         modifier = Modifier
@@ -51,7 +58,11 @@ fun BankListItem(bank: Bank?) {
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(enabled = bank?.url != null && bank.url.length > 1) {
+                        onBankLinkClicked(bank?.url)
+                    },
                 text = bank?.url ?: "No information",
                 color = MaterialTheme.colors.taskItemTextColor,
                 style = MaterialTheme.typography.subtitle1,
@@ -73,5 +84,5 @@ fun BankListItemPreview() {
             phone = "234543",
             url = "www.jyskebank.dk"
         )
-    )
+    ) {}
 }

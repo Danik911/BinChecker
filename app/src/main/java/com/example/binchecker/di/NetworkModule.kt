@@ -1,8 +1,8 @@
 package com.example.binchecker.di
 
-import com.example.binchecker.data.local.BankDatabase
 import com.example.binchecker.data.remote.BinApi
 import com.example.binchecker.data.repository.RemoteDataSourceImpl
+import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.repository.LocalDataSource
 import com.example.binchecker.domain.repository.RemoteDataSource
 import com.example.binchecker.util.Constants.BASE_URL
@@ -13,6 +13,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -33,14 +34,20 @@ object NetworkModule {
             .build()
     }
 
+    @Provides
+    @Singleton
+    fun provideJson(): Json {
+        return Json { ignoreUnknownKeys = true }
+    }
+
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient, json: Json): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 

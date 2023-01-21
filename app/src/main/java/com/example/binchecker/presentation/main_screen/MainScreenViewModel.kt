@@ -56,6 +56,7 @@ class MainScreenViewModel @Inject constructor(
         } catch (e: Exception) {
             _apiResponseState.value = RequestState.Error(t = e)
             _messageBarState.value = MessageBarState(error = e)
+            Timber.d(e)
         }
 
     }

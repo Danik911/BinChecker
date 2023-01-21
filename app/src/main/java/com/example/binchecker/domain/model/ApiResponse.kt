@@ -3,6 +3,7 @@ package com.example.binchecker.domain.model
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import retrofit2.http.OPTIONS
 
 @Serializable
 data class ApiResponse(

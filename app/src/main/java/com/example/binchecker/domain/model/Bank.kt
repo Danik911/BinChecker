@@ -13,8 +13,8 @@ data class Bank(
     @Transient
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val city: String,
+    val city: String? = null,
     @SerialName("name") val bankName: String,
-    val phone: String,
-    val url: String
+    val phone: String? = null,
+    val url: String? = null
 )
