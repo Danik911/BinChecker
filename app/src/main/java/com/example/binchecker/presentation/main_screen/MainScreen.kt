@@ -6,12 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import coil.annotation.ExperimentalCoilApi
 import com.example.binchecker.navigation.Screen
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@ExperimentalCoilApi
 @Composable
 fun MainScreen(
     navController: NavHostController,
@@ -47,7 +45,5 @@ fun MainScreen(
                 }
             )
         }
-
     )
-
 }
