@@ -1,7 +1,9 @@
 package com.example.binchecker.util
 
-import android.content.Intent
+import android.net.Uri
 import com.example.binchecker.domain.model.Bank
+import com.example.binchecker.domain.model.Country
+
 
 object Extensions {
 
@@ -15,6 +17,11 @@ object Extensions {
 
     fun Boolean.parseResultToMessage(): String {
         return if (this) "Success" else "Fail"
+    }
+
+    fun Country.parseBankLocationToString(bank: Bank?): String {
+        return "geo:${this.latitude}.0000,${this.longitude}.0000?q=" + Uri.encode("${bank?.bankName}")
+
     }
 
 }

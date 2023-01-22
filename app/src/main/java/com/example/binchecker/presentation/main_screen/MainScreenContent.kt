@@ -35,7 +35,8 @@ fun MainScreenContent(
     bank: Bank?,
     onSearchClicked: (String) -> Unit,
     onBankLinkClicked: (String?) -> Unit,
-    onBankPhoneClicked: (String?) -> Unit
+    onBankPhoneClicked: (String?) -> Unit,
+    onBankLocationClicked: (String?) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -66,7 +67,8 @@ fun MainScreenContent(
                 onSearchClicked = { onSearchClicked(binBank) },
                 loadingState = apiResponse,
                 onBankLinkClicked = onBankLinkClicked,
-                onBankPhoneClicked = onBankPhoneClicked
+                onBankPhoneClicked = onBankPhoneClicked,
+                onBankLocationClicked = onBankLocationClicked
             )
         }
     }
@@ -81,7 +83,8 @@ private fun CentralContent(
     onSearchClicked: (String) -> Unit,
     loadingState: RequestState<ApiResponse>,
     onBankLinkClicked: (String?) -> Unit,
-    onBankPhoneClicked: (String?) -> Unit
+    onBankPhoneClicked: (String?) -> Unit,
+    onBankLocationClicked: (String?) -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Column(
@@ -91,7 +94,8 @@ private fun CentralContent(
         BankListItem(
             bank = bank,
             onBankLinkClicked = onBankLinkClicked,
-            onBankPhoneClicked = onBankPhoneClicked
+            onBankPhoneClicked = onBankPhoneClicked,
+            onBankLocationClicked = onBankLocationClicked
         )
 
         OutlinedTextField(

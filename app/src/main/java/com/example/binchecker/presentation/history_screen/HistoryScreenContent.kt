@@ -94,7 +94,8 @@ fun HistoryScreenContent(
                         BankListItem(
                            bank = bank,
                             onBankLinkClicked = {},
-                            onBankPhoneClicked = {}
+                            onBankPhoneClicked = {},
+                            onBankLocationClicked = {}
                         )
                     }
                 )

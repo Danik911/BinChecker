@@ -13,10 +13,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.binchecker.domain.model.Bank
+import com.example.binchecker.domain.model.Country
 import com.example.binchecker.navigation.Screen
 import com.example.binchecker.util.Extensions.formatPhoneNumber
 import com.example.binchecker.util.Extensions.formatWebAddress
-import com.example.binchecker.util.MessageBarState
+import com.example.binchecker.util.Extensions.parseBankLocationToString
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -29,6 +30,8 @@ fun MainScreen(
     val messageBarState by mainViewModel.messageBarState
     val binBank by mainViewModel.binBank
     val bank by mainViewModel.bank
+    val country by mainViewModel.country
+
     val context = LocalContext.current
 
 
@@ -61,6 +64,13 @@ fun MainScreen(
                 },
                 onBankPhoneClicked = {
                     onBankPhoneClicked(bank?.phone, context = context)
+                },
+                onBankLocationClicked = {
+                    onBankLocationClicked(
+                        country = country,
+                        bank = bank,
+                        context = context
+                    )
                 }
             )
         }
@@ -97,5 +107,19 @@ private fun onBankPhoneClicked(phone: String?, context: Context) {
     pendingIntent.send()
 }
 
-//4571 7360
+private fun onBankLocationClicked(country: Country?, bank: Bank?, context: Context) {
+    val intent = Intent(
+        Intent.ACTION_VIEW,
+        Uri.parse(country?.parseBankLocationToString(bank))
+    )
+    val pendingIntent = TaskStackBuilder.create(context).run {
+        addNextIntentWithParentStack(intent)
+        getPendingIntent(
+            0,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+    pendingIntent.send()
+}
+
 

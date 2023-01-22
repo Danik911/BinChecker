@@ -49,6 +49,7 @@ class MainScreenViewModel @Inject constructor(
 
                 _apiResponseState.value = RequestState.Success(data = response)
                 _bank.value = response.bank
+                _country.value = response.country
                 _messageBarState.value =
                     MessageBarState(
                         message = response.success.parseResultToMessage(),
