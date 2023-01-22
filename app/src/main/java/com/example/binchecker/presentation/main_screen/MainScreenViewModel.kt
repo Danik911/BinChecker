@@ -9,6 +9,7 @@ import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.domain.model.Country
 import com.example.binchecker.domain.use_cases.GetApiResponseUseCase
+import com.example.binchecker.util.Extensions.parseResultToMessage
 import com.example.binchecker.util.MessageBarState
 import com.example.binchecker.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,7 +50,10 @@ class MainScreenViewModel @Inject constructor(
                 _apiResponseState.value = RequestState.Success(data = response)
                 _bank.value = response.bank
                 _messageBarState.value =
-                    MessageBarState(message = response.success.parseResult(), error = response.error)
+                    MessageBarState(
+                        message = response.success.parseResultToMessage(),
+                        error = response.error
+                    )
                 Timber.d("$response")
 
             }
@@ -66,11 +70,9 @@ class MainScreenViewModel @Inject constructor(
             _binBank.value = newName
         }
     }
-    fun resetMessageBar(){
+
+    fun resetMessageBar() {
         _messageBarState.value = MessageBarState()
-    }
-    private fun Boolean.parseResult(): String{
-        return if (this) "Success" else "Fail"
     }
 }
 

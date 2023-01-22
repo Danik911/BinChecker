@@ -6,7 +6,6 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.binchecker.navigation.Screen
+import com.example.binchecker.util.Extensions.formatWebAddress
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -52,27 +52,19 @@ fun MainScreen(
 
                 },
                 onBankLinkClicked = {
-                    val intent = Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://medium.com/")
+                    onBankLinkClicked(
+                        link =bank?.url, context = context
                     )
-                    val pendingIntent = TaskStackBuilder.create(context).run {
-                        addNextIntentWithParentStack(intent)
-                        getPendingIntent(
-                            0,
-                            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                        )
-                    }
-                    pendingIntent.send()
                 }
             )
         }
     )
 }
-private fun onBankLinkClicked(link: String, context: Context){
+
+private fun onBankLinkClicked(link: String?, context: Context) {
     val intent = Intent(
         Intent.ACTION_VIEW,
-        Uri.parse(link)
+        Uri.parse(link.formatWebAddress())
     )
     val pendingIntent = TaskStackBuilder.create(context).run {
         addNextIntentWithParentStack(intent)
@@ -83,4 +75,5 @@ private fun onBankLinkClicked(link: String, context: Context){
     }
     pendingIntent.send()
 }
+
 

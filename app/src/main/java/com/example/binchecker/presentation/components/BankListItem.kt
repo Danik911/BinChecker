@@ -12,13 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.binchecker.domain.model.Bank
-import com.example.binchecker.presentation.ui.theme.SMALL_PADDING
-import com.example.binchecker.presentation.ui.theme.TASK_ITEM_ELEVATION
-import com.example.binchecker.presentation.ui.theme.bankItemBackgroundColor
-import com.example.binchecker.presentation.ui.theme.taskItemTextColor
+import com.example.binchecker.presentation.ui.theme.*
 
 
 @Composable
@@ -64,10 +62,11 @@ fun BankListItem(
                         onBankLinkClicked(bank?.url)
                     },
                 text = bank?.url ?: "No information",
-                color = MaterialTheme.colors.taskItemTextColor,
+                color = LoadingBlue,
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                textDecoration = TextDecoration.Underline
             )
         }
     }
