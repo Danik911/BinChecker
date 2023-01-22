@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -22,7 +23,8 @@ import com.example.binchecker.presentation.ui.theme.*
 @Composable
 fun BankListItem(
     bank: Bank?,
-    onBankLinkClicked: (String?) -> Unit
+    onBankLinkClicked: (String?) -> Unit,
+    onBankPhoneClicked: (String?) -> Unit
 ) {
 
     Surface(
@@ -48,12 +50,17 @@ fun BankListItem(
 
             }
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(enabled = bank?.phone != null && bank.phone.length > 1) {
+                        onBankPhoneClicked(bank?.phone)
+                    },
                 text = bank?.phone ?: "No information",
                 color = MaterialTheme.colors.taskItemTextColor,
                 style = MaterialTheme.typography.subtitle1,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textDecoration = TextDecoration.Underline
             )
             Text(
                 modifier = Modifier
@@ -66,7 +73,8 @@ fun BankListItem(
                 style = MaterialTheme.typography.subtitle1,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                textDecoration = TextDecoration.Underline
+                fontStyle = FontStyle.Italic
+
             )
         }
     }
@@ -75,13 +83,5 @@ fun BankListItem(
 @Composable
 @Preview
 fun BankListItemPreview() {
-    BankListItem(
-        bank = Bank(
-            id = 1,
-            city = "Moscow",
-            bankName = "Some name",
-            phone = "234543",
-            url = "www.jyskebank.dk"
-        )
-    ) {}
+
 }

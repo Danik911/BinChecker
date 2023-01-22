@@ -12,8 +12,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.binchecker.domain.model.Bank
 import com.example.binchecker.navigation.Screen
+import com.example.binchecker.util.Extensions.formatPhoneNumber
 import com.example.binchecker.util.Extensions.formatWebAddress
+import com.example.binchecker.util.MessageBarState
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -53,8 +56,11 @@ fun MainScreen(
                 },
                 onBankLinkClicked = {
                     onBankLinkClicked(
-                        link =bank?.url, context = context
+                        link = bank?.url, context = context
                     )
+                },
+                onBankPhoneClicked = {
+                    onBankPhoneClicked(bank?.phone, context = context)
                 }
             )
         }
@@ -76,4 +82,20 @@ private fun onBankLinkClicked(link: String?, context: Context) {
     pendingIntent.send()
 }
 
+private fun onBankPhoneClicked(phone: String?, context: Context) {
+    val intent = Intent(
+        Intent.ACTION_DIAL,
+        Uri.parse(phone.formatPhoneNumber())
+    )
+    val pendingIntent = TaskStackBuilder.create(context).run {
+        addNextIntentWithParentStack(intent)
+        getPendingIntent(
+            0,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+    pendingIntent.send()
+}
+
+//4571 7360
 

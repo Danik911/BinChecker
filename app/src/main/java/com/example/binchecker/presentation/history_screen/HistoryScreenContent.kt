@@ -92,8 +92,10 @@ fun HistoryScreenContent(
                     background = { RedBackground(degrees = degrees) },
                     dismissContent = {
                         BankListItem(
-                           bank = bank
-                        ){}
+                           bank = bank,
+                            onBankLinkClicked = {},
+                            onBankPhoneClicked = {}
+                        )
                     }
                 )
             }

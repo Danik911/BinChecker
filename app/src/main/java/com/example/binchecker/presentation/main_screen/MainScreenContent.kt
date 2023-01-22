@@ -1,13 +1,19 @@
 package com.example.binchecker.presentation.main_screen
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.binchecker.domain.model.ApiResponse
 import com.example.binchecker.domain.model.Bank
@@ -28,7 +34,8 @@ fun MainScreenContent(
     onBinBankChanged: (String) -> Unit,
     bank: Bank?,
     onSearchClicked: (String) -> Unit,
-    onBankLinkClicked: (String?) -> Unit
+    onBankLinkClicked: (String?) -> Unit,
+    onBankPhoneClicked: (String?) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -58,12 +65,14 @@ fun MainScreenContent(
                 bank = bank,
                 onSearchClicked = { onSearchClicked(binBank) },
                 loadingState = apiResponse,
-                onBankLinkClicked = onBankLinkClicked
+                onBankLinkClicked = onBankLinkClicked,
+                onBankPhoneClicked = onBankPhoneClicked
             )
         }
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun CentralContent(
     binBank: String,
@@ -72,12 +81,18 @@ private fun CentralContent(
     onSearchClicked: (String) -> Unit,
     loadingState: RequestState<ApiResponse>,
     onBankLinkClicked: (String?) -> Unit,
+    onBankPhoneClicked: (String?) -> Unit
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     Column(
         modifier = Modifier.padding(SMALL_PADDING)
     ) {
 
-        BankListItem(bank = bank, onBankLinkClicked = onBankLinkClicked)
+        BankListItem(
+            bank = bank,
+            onBankLinkClicked = onBankLinkClicked,
+            onBankPhoneClicked = onBankPhoneClicked
+        )
 
         OutlinedTextField(
             value = binBank,
@@ -85,7 +100,13 @@ private fun CentralContent(
             label = { Text(text = "Insert BIN") },
             textStyle = MaterialTheme.typography.body1,
             singleLine = true,
-            modifier = Modifier.padding(top = MEDIUM_PADDING)
+            modifier = Modifier.padding(top = MEDIUM_PADDING),
+            keyboardOptions = KeyboardOptions(
+                autoCorrect = false,
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done,
+            ),
+            keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() })
         )
 
         SearchButton(
